@@ -1,12 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>L'Épicure | Restaurant Gastronomique</title>
+    <!-- Police Google Fonts (Outfit) -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                L'Épicure<span>.</span>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="#menu" class="nav-link">Menu</a></li>
+                <li><a href="#histoire" class="nav-link">Notre Histoire</a></li>
+                <li><a href="#galerie" class="nav-link">Galerie</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <!-- Bouton affiché uniquement sur mobile à l'intérieur du menu -->
+                <li class="mobile-only"><a href="#reserver" class="btn-primary">Réserver</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <a href="#reserver" class="btn-primary desktop-only">Réserver</a>
+                <button class="mobile-menu-btn" aria-label="Ouvrir le menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Script pour la logique de la navbar -->
+    <script>
+        const mobileBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileBtn.addEventListener('click', () => {
+            mobileBtn.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            // Empêcher le défilement du corps quand le menu est ouvert
+            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : 'auto';
+        });
+
+        // Fermer le menu au clic sur un lien (pour la version mobile)
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileBtn.classList.remove('active');
+                navLinks.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        });
+
+        // Effet Glassmorphism (flou) au scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
 </body>
 </html>
